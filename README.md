@@ -39,11 +39,15 @@ Checkpoint file used for restarting simulations.
 An empty file created when the simulation ends normally. Useful as a completion flag.
 
 4. `filename.gsd` (only if `gsd_mode` is `on`)
-Stores trajectory data in GSD format.
-- The particles/diameter data contains persistence variable of each site, 0 or 1.
-- The particles/typid data contains 0 for type and 1 for type B, where type B corresponds to lattice sites with excitations.
+Stores trajectory data in GSD format, which contains:
+- `particles/N`: Total number of lattice sites
+- `particles/position`: Positions of the lattice sites
+- `particles/diameter`: Persistence variable of each site (0 or 1).
+- `particles/typid`: Site type identifier -- 0 for type A and 1 for type B, where type B indicates an excited site.
+- `configuration/box`: System size information.
+- `configuration/step`: Current kinetic Monte Carlo step.
 
 ## Notes
-- Ensure the `gsd.c` source file is included and properly linked.
+- Ensure the `gsd.h` and `gsd.c` files are included and properly linked.
 - The program assumes a lattice-based system in 2 dimension with kinetic constraints.
 - GSD files can be visualized using Ovito or analyzed with Python libraries such as `gsd` and `hoomd`.
